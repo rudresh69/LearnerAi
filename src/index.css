@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #6366f1;
+  --accent-color: #8b5cf6;
+  --background-color: #f9fafb;
+  --card-background: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background-color: var(--card-background);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-all duration-200 ease-in-out;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-md transition-all duration-200 ease-in-out;
+}
+
+.input-field {
+  @apply w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+.tab-active {
+  @apply border-b-2 border-blue-500 text-blue-600 font-medium;
+}
+
+.tab-inactive {
+  @apply text-gray-500 hover:text-gray-700;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Mermaid customization */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Enhanced SVG rendering for mind maps */
+.mermaid svg g.mindmap-node > rect,
+.mermaid svg g.mindmap-node > circle,
+.mermaid svg g.mindmap-node > ellipse {
+  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.mermaid svg g.mindmap-node > text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.mermaid svg g.mindmap-node.root > text {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Improve image modal */
+.image-modal-container {
+  @apply fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4;
+}
+
+.image-modal {
+  @apply bg-white rounded-lg max-w-5xl w-full max-h-[90vh] overflow-hidden;
+}
+
+.image-modal-header {
+  @apply flex justify-between items-center p-4 border-b;
+}
+
+.image-modal-content {
+  @apply p-4 overflow-auto max-h-[calc(90vh-8rem)];
+}
+
+.image-modal-footer {
+  @apply p-4 border-t;
+}
+
+.zoom-controls {
+  @apply absolute top-16 right-4 bg-white rounded-md shadow-md flex z-10;
+}
+
+.zoom-button {
+  @apply p-2 hover:bg-gray-100 transition-colors;
+}

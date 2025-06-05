@@ -1,0 +1,150 @@
+Here’s a Copilot-optimized README.md for your Learner.ai project — written to guide Copilot better and also help you (or any dev) stay aligned:
+
+
+---
+
+Learner.ai — Mindmap Generation Platform
+
+Overview
+
+Learner.ai is a web app that allows users to generate interactive mindmaps using Google OAuth for login, Gemini API for mindmap creation, and Redis for session & cache management.
+Admins can manage user sessions via a secure admin panel.
+
+
+---
+
+Tech Stack
+
+Frontend: React + TypeScript + TailwindCSS
+
+Backend: Flask (Python)
+
+Auth: Google OAuth 2.0 (client-side + server-side)
+
+Data: Redis (session and mindmap caching)
+
+AI: Gemini API (for mindmap generation)
+
+Deployment: Docker-ready (for future scalability)
+
+
+
+---
+
+Core Features
+
+Google OAuth Login only
+
+Session Management using Redis
+
+Limit: Max 5 mindmaps per user
+
+Admin Panel to:
+
+View all active sessions
+
+View user mindmap usage
+
+Delete/reset sessions
+
+
+
+
+---
+
+Important Constraints
+
+> Copilot must not modify the existing mindmap generation logic.
+It is already tested and functional using Gemini API and MermaidJS.
+
+
+
+
+---
+
+Endpoints Overview
+
+Flask Backend (server.py)
+
+GET /api/user: Get logged-in user
+
+POST /api/google-login: Start OAuth
+
+GET /api/google-callback: Handle OAuth
+
+POST /api/logout: Destroy session
+
+GET /api/mindmaps: Fetch user’s mindmaps
+
+POST /api/generate: Generate new mindmap
+
+DELETE /api/mindmaps/<id>: Delete specific mindmap
+
+
+Redis Usage
+
+session:<user_email> → stores user session
+
+mindmaps:<user_email> → stores up to 5 mindmaps
+
+TTL for session expiry (optional)
+
+
+
+---
+
+Environment Variables (.env)
+
+GOOGLE_CLIENT_ID=your_client_id_here
+GOOGLE_CLIENT_SECRET=your_secret_here
+GOOGLE_REDIRECT_URI=http://localhost:5000/api/google-callback
+GEMINI_API_KEY=your_gemini_api_key_here
+SECRET_KEY=flask_secret_key_here
+REDIS_URL=redis://localhost:6379/0
+ADMIN_EMAIL=admin@gmail.com
+
+
+---
+
+Setup Instructions
+
+# Frontend
+cd client
+npm install
+npm start
+
+# Backend
+cd backend
+pip install -r requirements.txt
+python server.py
+
+
+---
+
+Frontend File Highlights
+
+App.tsx — Handles routes, session check, login/logout, limits mindmaps to 5 per user
+
+MindMapForm.tsx — Inputs + calls generator
+
+AdminPanel.tsx — Displays sessions, user data
+
+api.ts — Axios methods to connect frontend to backend
+
+
+
+---
+
+Development Notes
+
+Write TODO comments clearly if expanding functionality
+
+Use Copilot to autocomplete repetitive logic, not design flow
+
+Keep mindmap generation untouched unless explicitly improving visuals or UX
+
+
+
+---
+
+Let me know if you want a short one-line README summary too, for GitHub repo description or Copilot chat box.
