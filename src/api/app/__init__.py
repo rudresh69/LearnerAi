@@ -30,13 +30,15 @@ def create_app():
         SESSION_REDIS=redis.from_url(redis_url),
         SESSION_PERMANENT=False,
         SESSION_USE_SIGNER=True,
-        SESSION_COOKIE_SAMESITE="None",   # Updated for cross-site cookies
-        SESSION_COOKIE_SECURE=True,       # Updated for HTTPS
+        SESSION_COOKIE_NAME="session",
+        SESSION_COOKIE_SAMESITE="None",   
+        SESSION_COOKIE_SECURE=True,       
     )
     Session(app)
 
     # CORS for API routes — explicitly allow your frontend origin
-    CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": os.getenv("FRONTEND_URL")}})
+    CORS(app, supports_credentials=True, origins=os.getenv("FRONTEND_URL"))
+
 
     # ✅ OAuth must be initialized BEFORE blueprints are imported
     oauth.init_app(app)

@@ -1,7 +1,7 @@
 // api.ts
 import axios from 'axios';
 import { MindMapRequest, MindMapResponse, ImageResult } from '../types';
-
+axios.defaults.withCredentials = true;
 // ✅ Base URL of Flask backend
 export const API_BASE = import.meta.env.VITE_BACKEND_URL;
 

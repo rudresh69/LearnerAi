@@ -72,3 +72,12 @@ def logout():
         update_last_active(session["user"])
     session.pop("user", None)
     return jsonify({"message": "Logged out"})
+
+@bp.route("/debug-session")
+def debug_session():
+    return jsonify({
+        "session": dict(session),
+        "cookies": dict(request.cookies),
+        "user": session.get("user")
+    })
+s
