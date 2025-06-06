@@ -80,4 +80,3 @@ def debug_session():
         "cookies": dict(request.cookies),
         "user": session.get("user")
     })
-s
