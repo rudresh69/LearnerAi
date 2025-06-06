@@ -34,6 +34,7 @@ def google_callback():
         return redirect(f"{FRONTEND_URL}/?banned=true")
 
     session["user"] = email
+    print(f"User {email} logged in, session set: {session.get('user')}")
     session_id = request.cookies.get(app.config["SESSION_COOKIE_NAME"])
 
     app.config["SESSION_REDIS"].hset(redis_key, mapping={
