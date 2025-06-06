@@ -2,7 +2,9 @@ from flask import Blueprint, request, redirect, jsonify, session, current_app as
 from app import oauth, google
 from datetime import datetime
 import os
+
 FRONTEND_URL = os.getenv("FRONTEND_URL")
+REDIRECT_URI = os.getenv("REDIRECT_URI")  # e.g. https://learner-ai-final-production.up.railway.app/api/google-callback
 
 bp = Blueprint("auth", __name__, url_prefix="/api")
 
@@ -19,9 +21,11 @@ def get_user_limit(email: str) -> int:
 
 @bp.route("/google-login")
 def google_login():
-    return google.authorize_redirect(request.host_url + "api/google-callback")
+    # Use fixed redirect URI from env var
+    print("OAuth redirect URI:", REDIRECT_URI)
+    return google.authorize_redirect(REDIRECT_URI)
 
-@bp.route("/google-callback")   
+@bp.route("/google-callback")
 def google_callback():
     token = google.authorize_access_token()
     user_info = google.get("https://openidconnect.googleapis.com/v1/userinfo").json()
