@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 FRONTEND_URL = os.getenv("FRONTEND_URL")
-REDIRECT_URI = os.getenv("REDIRECT_URI")  # e.g. https://learner-ai-final-production.up.railway.app/api/google-callback
+REDIRECT_URI = os.getenv("REDIRECT_URI") 
 
 bp = Blueprint("auth", __name__, url_prefix="/api")
 
@@ -21,8 +21,6 @@ def get_user_limit(email: str) -> int:
 
 @bp.route("/google-login")
 def google_login():
-    # Use fixed redirect URI from env var
-    print("OAuth redirect URI:", REDIRECT_URI)
     return google.authorize_redirect(REDIRECT_URI)
 
 @bp.route("/google-callback")
