@@ -1,0 +1,40 @@
+.bolt
+.venv
+.vite
+node_modules
+public
+src
+	api
+		__pycache__
+		cache.py
+		client_secrets.json
+		server.py
+	components
+		AdminPanel.tsx
+		Features.tsx
+		Footer.tsx
+		Header.tsx
+		HowItWorks.tsx
+		ImageModal.tsx
+		Login.tsx
+		MindMapDisplay.tsx
+		MindMapForm.tsx
+		RelatedImages.tsx
+	services
+		api.ts
+	App.tsx
+	index.css
+	main.tsx
+	types.ts
+	vite-env.d.ts
+.env
+eslint.config.js
+index.html
+pakage-lock.json
+pakage.json
+postcss.config.js
+requirements.txt
+tailwind.config.js
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
