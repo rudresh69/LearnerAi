@@ -35,11 +35,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     npm cache clean --force
 
-# Install both Mermaid CLI and Puppeteer together to avoid "idealTree" conflict
-RUN mkdir -p /app && cd /app && \
-    npm init -y && \
-    npm install --omit=dev @mermaid-js/mermaid-cli puppeteer && \
-    rm -rf /root/.npm/_* /root/.npm/_logs
+# Install Mermaid CLI and Puppeteer globally
+RUN npm install -g @mermaid-js/mermaid-cli puppeteer
 
 # Set Puppeteer executable path to Google Chrome
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
@@ -57,13 +54,16 @@ COPY . .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Expose port
-EXPOSE 5000
+# Expose the dynamic port (default 5000)
+ARG PORT=5000
+ENV PORT=${PORT}
 
-# Set environment variables
+EXPOSE ${PORT}
+
+# Set environment variables for Flask to run on dynamic port
 ENV FLASK_APP=src/api/server.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+ENV FLASK_RUN_PORT=${PORT}
 
 # Start the app
 CMD ["flask", "run"]
