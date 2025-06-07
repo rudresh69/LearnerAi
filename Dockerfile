@@ -1,7 +1,7 @@
 # Use official Python image
 FROM python:3.11-slim
 
-# Install OS-level dependencies and Google Chrome
+# Install OS-level dependencies including Google Chrome
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -22,40 +22,48 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     xdg-utils \
     --no-install-recommends && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
-    rm google-chrome-stable_current_amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Node.js and Mermaid CLI
+# Install Google Chrome (stable)
+RUN curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-linux-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Node.js (latest LTS) and avoid npm idealTree bug
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
-    npm install -g @mermaid-js/mermaid-cli && \
-    npm install puppeteer --omit=dev
+    npm cache clean --force
 
-# Set Puppeteer to use the correct Chrome path
+# Install Mermaid CLI globally
+RUN npm install -g @mermaid-js/mermaid-cli
+
+# Install Puppeteer locally so Mermaid CLI can use it
+RUN npm install puppeteer --omit=dev
+
+# Set Puppeteer executable path to Google Chrome
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
 
-# Ensure Puppeteer cache directory exists
+# Optional: create Puppeteer cache folder for Render
 RUN mkdir -p /opt/render/project/.cache/puppeteer
 
-# Set working directory
+# Create working directory
 WORKDIR /app
 
-# Copy all project files
+# Copy project files
 COPY . .
 
 # Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Expose Flask port
+# Expose port
 EXPOSE 5000
 
-# Flask environment variables
+# Set environment variables
 ENV FLASK_APP=src/api/server.py
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=5000
 
-# Run the app
+# Start the Flask app
 CMD ["flask", "run"]
