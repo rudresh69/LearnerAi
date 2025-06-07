@@ -51,6 +51,7 @@ def google_callback():
 
 @bp.route("/user")
 def get_user():
+    print("Session contents:", dict(session)) 
     email = session.get("user")
     if not email:
         return jsonify({"error": "Not logged in"}), 401
