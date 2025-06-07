@@ -10,11 +10,20 @@ def convert_mermaid_to_svg(mermaid_code: str) -> str:
 
     svg_path = mmd_path.replace(".mmd", ".svg")
 
-    # Call Mermaid CLI to generate SVG
-    subprocess.run(f"mmdc -i {mmd_path} -o {svg_path} -w 1200 -H 800", shell=True, check=True)
+    # Use puppeteerConfigFile to avoid Chromium error on Render
+    command = [
+        "mmdc",
+        "-i", mmd_path,
+        "-o", svg_path,
+        "-w", "1200",
+        "-H", "800",
+        "--puppeteerConfigFile", "puppeteer-config.json"
+    ]
+
+    subprocess.run(command, check=True)
 
     # Read and return SVG content
-    with open(svg_path, "r") as f:
+    with open(svg_path, "r", encoding="utf-8") as f:
         svg = f.read()
 
     # Clean up temp files
