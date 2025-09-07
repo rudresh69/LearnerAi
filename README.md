@@ -1,24 +1,30 @@
-📘 LearnerAI.git
+<div align="center">
 
-AI-powered Mind Map Generation Platform that helps learners visualize knowledge using interactive mind maps, Google OAuth login, and AI-driven topic breakdowns. Built with React (TypeScript, Tailwind, Vite) on the frontend and Flask + Redis + Gemini API on the backend.
+# 🚀 LearnerAI
 
-🚀 Features
+### AI-powered Mind Map Generator
 
-🔑 Authentication – Secure Google OAuth login with session management.
+AI-powered **Mind Map Generation Platform** that helps learners visualize knowledge using interactive mind maps, Google OAuth login, and AI-driven topic breakdowns. Built with **React (TypeScript, Tailwind, Vite)** on the frontend and **Flask + Redis + Gemini API** on the backend.
 
-🧠 AI-Powered Mind Maps – Generates structured mind maps using Gemini API.
+</div>
 
-💾 Caching with Redis – Reduces API calls by storing generated mind maps.
+---
 
-🖼️ Export Options – Export generated mind maps as SVG or PDF.
+## ✨ Features
 
-📱 Responsive Design – Optimized for mobile and desktop.
+* 🔑 **Authentication** – Secure Google OAuth login with session management.
+* 🧠 **AI-Powered Mind Maps** – Generates structured mind maps using Gemini API.
+* 💾 **Caching with Redis** – Reduces API calls by storing generated mind maps.
+* 🖼️ **Export Options** – Export generated mind maps as SVG or PDF.
+* 📱 **Responsive Design** – Optimized for mobile and desktop.
+* ⚙️ **Admin Panel** – Manage active sessions and cached mind maps.
+* 🐳 **Dockerized Deployment** – Backend services ready for containerized environments.
 
-⚙️ Admin Panel – Manage active sessions and cached mind maps.
+---
 
-🐳 Dockerized Deployment – Backend services ready for containerized environments.
+## 📂 Project Structure
 
-📂 Project Structure
+```plaintext
 LearnerAi.git/
 ├── Dockerfile
 ├── package.json
@@ -30,19 +36,22 @@ LearnerAi.git/
 │   ├── services/       # Frontend service layer
 │   └── types.ts
 └── vercel.json
+```
 
-⚡ Getting Started
-Prerequisites
+---
 
-Node.js (v18+)
+## ⚡ Getting Started
 
-Python 3.12+
+### 🔧 Prerequisites
 
-Redis
+* Node.js (v18+)
+* Python 3.12+
+* Redis
+* Docker (optional)
 
-Docker (optional, for containerized deployment)
+### 📥 Installation
 
-Installation
+```bash
 # Clone the repository
 git clone https://github.com/rudresh69/LearnerAi.git
 cd LearnerAi.git
@@ -52,56 +61,57 @@ npm install
 
 # Install backend dependencies
 pip install -r requirements.txt
+```
 
-Running
+### ▶️ Running
+
+```bash
 # Start frontend (Vite dev server)
 npm run dev
 
 # Start backend (Flask)
 python src/api/server.py
-
+```
 
 Using Docker:
 
+```bash
 docker build -t learnerai .
 docker run -p 3000:3000 learnerai
+```
 
-🧪 Testing
+---
+
+## 🧪 Testing
 
 Frontend:
 
+```bash
 npm test
-
+```
 
 Backend:
 
+```bash
 pytest
+```
 
-🛣️ Roadmap
+---
 
- Google OAuth integration
+## 🛣️ Roadmap
 
- Mind map generation (Gemini API)
+* [x] Google OAuth integration
+* [x] Mind map generation (Gemini API)
+* [x] Session & cache management with Redis
+* [ ] Collaborative editing of mind maps
+* [ ] Multi-language support
+* [ ] Cloud deployment (AWS/GCP)
 
- Session & cache management with Redis
+---
 
- 
-🙌 Acknowledgments
+## 🙌 Acknowledgments
 
-Google Gemini API
- for mind map generation
-
-Mermaid.js
- for diagram rendering
-
-Redis
- for caching & session management
-
-TailwindCSS
- for styling
-
-<div align="right">
-
-⬆️ Back to Top
-
-</div>
+* [Google Gemini API](https://ai.google/) – for mind map generation
+* [Mermaid.js](https://mermaid.js.org/) – for diagram rendering
+* [Redis](https://redis.io/) – for caching & session management
+* [TailwindCSS](https://tailwindcss.com/) – for styling
